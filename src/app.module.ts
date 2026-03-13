@@ -7,6 +7,11 @@ import { RedisModule } from "./redis/redis.module";
 import { AuthModule } from "./auth/auth.module";
 import { UsersModule } from "./users/users.module";
 import { TelegramModule } from "./telegram/telegram.module";
+import { CategoriesModule } from "./categories/categories.module";
+import { ProductsModule } from "./products/products.module";
+import { CartModule } from "./cart/cart.module";
+import { WishlistModule } from "./wishlist/wishlist.module";
+import { UploadModule } from "./upload/upload.module";
 
 @Module({
   imports: [
@@ -43,6 +48,11 @@ import { TelegramModule } from "./telegram/telegram.module";
     AuthModule,
     UsersModule,
     TelegramModule,
+    CategoriesModule,
+    ProductsModule,
+    CartModule,
+    WishlistModule,
+    UploadModule,
   ],
   providers: [
     // Global rate limiting guard
