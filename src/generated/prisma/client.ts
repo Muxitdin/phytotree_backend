@@ -61,3 +61,18 @@ export type CartItem = Prisma.CartItemModel
  * 
  */
 export type WishlistItem = Prisma.WishlistItemModel
+/**
+ * Model Order
+ * 
+ */
+export type Order = Prisma.OrderModel
+/**
+ * Model OrderItem
+ * 
+ */
+export type OrderItem = Prisma.OrderItemModel
+/**
+ * Model Payment
+ * 
+ */
+export type Payment = Prisma.PaymentModel

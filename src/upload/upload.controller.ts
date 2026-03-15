@@ -24,9 +24,7 @@ export class UploadController {
   @Get("signature")
   @UseGuards(RolesGuard)
   @Roles(Role.ADMIN)
-  getSignature(
-    @Query("folder") folder: UploadFolder,
-  ): UploadSignature {
+  getSignature(@Query("folder") folder: UploadFolder): UploadSignature {
     if (!folder || !VALID_FOLDERS.includes(folder)) {
       throw new BadRequestException(
         `Invalid folder. Must be one of: ${VALID_FOLDERS.join(", ")}`,
