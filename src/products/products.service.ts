@@ -76,6 +76,7 @@ export class ProductsService {
         price: new Prisma.Decimal(dto.price),
         images: dto.images ?? [],
         inStock: dto.inStock ?? true,
+        quantity: dto.inStock ? dto.quantity : 0,
       },
       include: {
         category: {
@@ -245,6 +246,7 @@ export class ProductsService {
       updateData.price = new Prisma.Decimal(dto.price);
     if (dto.images !== undefined) updateData.images = dto.images;
     if (dto.inStock !== undefined) updateData.inStock = dto.inStock;
+    if (dto.quantity !== undefined) updateData.quantity = dto.quantity;
 
     return this.prisma.product.update({
       where: { id },

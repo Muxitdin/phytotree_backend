@@ -87,6 +87,7 @@ model Product {
   price         Decimal         @db.Decimal(10, 2)
   images        String[]        @default([])
   inStock       Boolean         @default(true) @map("in_stock")
+  quantity      Int             @default(0)
   createdAt     DateTime        @default(now()) @map("created_at")
   updatedAt     DateTime        @updatedAt @map("updated_at")
   cartItems     CartItem[]

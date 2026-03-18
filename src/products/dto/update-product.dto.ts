@@ -66,4 +66,8 @@ export class UpdateProductDto {
   @IsOptional()
   @IsBoolean()
   inStock?: boolean;
+
+  @IsNumber()
+  @Min(0)
+  quantity: number;
 }

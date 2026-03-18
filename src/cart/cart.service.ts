@@ -82,7 +82,7 @@ export class CartService {
       );
     }
 
-    if (!product.inStock) {
+    if (!product.inStock && product.quantity === 0) {
       throw new BadRequestException("Product is out of stock");
     }
 
@@ -121,6 +121,20 @@ export class CartService {
     productId: string,
     dto: UpdateCartItemDto,
   ): Promise<CartItemWithProduct> {
+    const product = await this.prisma.product.findUnique({
+      where: { id: productId },
+    });
+
+    if (!product) {
+      throw new NotFoundException(`Product with ID "${productId}" not found`);
+    }
+
+    if (!product.inStock && dto.quantity > product.quantity) {
+      throw new BadRequestException(
+        "Product is out of stock or not enough in stock",
+      );
+    }
+
     const cartItem = await this.prisma.cartItem.findUnique({
       where: {
         userId_productId: {
