@@ -17,7 +17,7 @@ export const ClickErrorMessages: Record<ClickError, string> = {
   [ClickError.InvalidAmount]: "Incorrect parameter amount",
   [ClickError.ActionNotFound]: "Action not found",
   [ClickError.AlreadyPaid]: "Already paid",
-  [ClickError.OrderNotFound]: "Order not found",
+  [ClickError.OrderNotFound]: "User/Order not found",
   [ClickError.TransactionNotFound]: "Transaction does not exist",
   [ClickError.UpdateFailed]: "Failed to update order",
   [ClickError.BadRequest]: "Error in request from click",

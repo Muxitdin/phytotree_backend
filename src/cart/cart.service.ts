@@ -82,8 +82,14 @@ export class CartService {
       );
     }
 
-    if (!product.inStock && product.quantity === 0) {
-      throw new BadRequestException("Product is out of stock");
+    if (
+      !product.inStock ||
+      product.quantity === 0 ||
+      dto.quantity! > product.quantity
+    ) {
+      throw new BadRequestException(
+        "Product is out of stock or not enough in stock",
+      );
     }
 
     // Upsert cart item (add or update quantity)
@@ -97,6 +103,10 @@ export class CartService {
     });
 
     if (existingItem) {
+      if (existingItem.quantity + dto.quantity! > product.quantity) {
+        throw new BadRequestException("Product is not enough in stock");
+      }
+
       // Update quantity
       return this.prisma.cartItem.update({
         where: { id: existingItem.id },
@@ -128,8 +138,16 @@ export class CartService {
     if (!product) {
       throw new NotFoundException(`Product with ID "${productId}" not found`);
     }
+    console.log(dto, product);
+    console.log(!product.inStock);
+    console.log(product.quantity === 0);
 
-    if (!product.inStock && dto.quantity > product.quantity) {
+    if (
+      !product.inStock ||
+      product.quantity === 0 ||
+      dto.quantity > product.quantity
+    ) {
+      console.log("entered 1");
       throw new BadRequestException(
         "Product is out of stock or not enough in stock",
       );
